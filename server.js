@@ -39,9 +39,10 @@ app.get("/api/waitlist", function(req, res) {
 });
 
 //adding new reservation to array and text file
-app.post("/api/new", function(req, res) {
+app.post("/api/tables", function(req, res) {
 	var newreservation = req.body;
-	newreservation.routeName = newreservation.name.replace(/\s+/g, "").toLowerCase;
+
+	// newreservation.routeName = newreservation.name.replace(/\s+/g, "").toLowerCase;
 
 	console.log(newreservation);
 
@@ -49,16 +50,16 @@ app.post("/api/new", function(req, res) {
 	// 	if (err) throw err;
 	// });
 
-	res.json(newreservation);
-
-	if (reservations.length <= 5) {
+	// res.json(newreservation);
+	console.log(reservations.length);
+	if (reservations.length < 5) {
 		reservations.push(newreservation);
-		alert("You have made a reservation!");
-	} else {
+		res.json(true)
+		} else {
 		waitlist.push(newreservation);
-		alert("All our tables are booked. You were added to the waitlist.");
-	}
-	
+		res.json(false)
+		}
+		console.log(reservations);
 });
 
 //==========================================================

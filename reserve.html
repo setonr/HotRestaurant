@@ -65,29 +65,34 @@
             </p>
         </div>
     </div>
-
-     <script type="text/javascript">
+    <script type="text/javascript">
     // Question: What does this code do?
     $("#add-btn").on("click", function(event) {
-      event.preventDefault();
-      var newTable = {
-        name: $("#name").val().trim(),
-        phone: $("#phone").val().trim(),
-        email: $("#email").val().trim(),
-        tableID: $("#table-id").val().trim()
-      };
-      // Question: What does this code do??
-      $.post("/api/new", newTable)
-      .done(function(data) {
-        console.log(data);
-        alert("Reservation Made");
-      });
-      $("#name").val("");
-      $("#phone").val("");
-      $("#email").val("");
-      $("#table-id").val("");
+        event.preventDefault();
+        var newTable = {
+            name: $("#name").val().trim(),
+            phone: $("#phone").val().trim(),
+            email: $("#email").val().trim(),
+            tableID: $("#table-id").val().trim()
+        };
+        // Question: What does this code do??
+        $.post("/api/tables", newTable)
+            .done(function(data) {
+                // console.log(data);
+                if (data === true) {
+                    alert("Yay! You are officially booked!");
+                }
+                if (data === false) {
+                    alert("You are on our waitlist!");
+                }
+                $("#name").val("");
+                $("#phone").val("");
+                $("#email").val("");
+                $("#table-id").val("");
+            });
+        return false;
     });
-  </script>
+    </script>
 </body>
 
 </html>
