@@ -29,6 +29,7 @@ app.get("/tables", function(req, res) {
 	res.sendFile(path.join(__dirname, "tables.html"));
 });
 
+//routes for api calls
 app.get("/api/tables", function(req, res) {
 	return res.json(reservations);
 });
@@ -44,9 +45,9 @@ app.post("/api/new", function(req, res) {
 
 	console.log(newreservation);
 
-	fs.appendFile("data.txt", JSON.toString(newreservation), function(err) {
-		if (err) throw err;
-	});
+	// fs.appendFile("data.txt", JSON.toString(newreservation), function(err) {
+	// 	if (err) throw err;
+	// });
 
 	res.json(newreservation);
 
@@ -57,7 +58,7 @@ app.post("/api/new", function(req, res) {
 		waitlist.push(newreservation);
 		alert("All our tables are booked. You were added to the waitlist.");
 	}
-
+	
 });
 
 //==========================================================

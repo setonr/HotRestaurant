@@ -18,8 +18,8 @@
       Hot Restaurant</h1>
             <h3><strong>Current reservations and waitlist.</strong></h3>
             <hr>
-            <a href="/tables">
-                <button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-plus"></span> View Tables</button>
+            <a href="/reserve">
+                <button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Make Reservation</button>
             </a>
             <a href="/">
                 <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-home"></span></button>
@@ -30,9 +30,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">Current Reservations</h4>
-                        </div>
-            <div class="panel-body" id="tableSection">
-<!--                 <div class="well" id="tableWell-01">
+                    </div>
+                    <div class="panel-body" id="tableSection">
+                        <!--                 <div class="well" id="tableWell-01">
                     <h2><span class="label label-primary">1</span> |</h2></div>
                 <div class="well" id="tableWell-11">
                     <h2><span class="label label-primary">2</span> | z</h2></div>
@@ -62,20 +62,15 @@
             </p>
         </div>
     </div>
-
-
     <script type="text/javascript">
     $(document).ready(function() {
         $.get("/api/tables", function(data) {
             console.log(data);
             for (var i = 0; i < data.length; i++) {
                 var table = $("<div class='well'>");
-                var number = $("<button type='button' class='btn btn-primary'>"i+1"</button>");
+                var number = $("<h2><span class='label label-primary'>" + (i+1) + "</span> | " + data[i].tableID + "</h2>");
                 table.append(number);
-                var uniqueID = $("<h3>");
-                uniqueID.append(data[i].uniqueID);
-                table.append(uniqueID);
-                $(".tableSection").append(table);
+                $("#tableSection").append(table);
             }
         });
     });
